@@ -43,9 +43,7 @@ def get_index(
     try:
         from pinecone import Pinecone, ServerlessSpec
     except ImportError as exc:
-        raise RuntimeError(
-            "pinecone is required. Install with: pip install pinecone"
-        ) from exc
+        raise RuntimeError("pinecone is required. Install with: pip install pinecone") from exc
 
     embedding_model = EmbeddingModel(embedding_model)
     dimension = 1536 if embedding_model == EmbeddingModel.SMALL else 3072

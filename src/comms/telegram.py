@@ -111,9 +111,8 @@ def _latest_message_json(updates: list[dict[str, Any]], baseline_update_id: int 
             continue
 
         update_id = update.get("update_id")
-        if baseline_update_id is not None:
-            if not isinstance(update_id, int) or update_id <= baseline_update_id:
-                continue
+        if baseline_update_id is not None and (not isinstance(update_id, int) or update_id <= baseline_update_id):
+            continue
 
         normalized = _normalize_message_update(update)
         if normalized is not None:

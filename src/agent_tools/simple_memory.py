@@ -49,7 +49,7 @@ class Memory:
         }
         self._entries.append(entry)
         if len(self._entries) > self._max:
-            self._entries = self._entries[-self._max:]
+            self._entries = self._entries[-self._max :]
         self._write()
         return entry
 

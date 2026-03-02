@@ -144,15 +144,9 @@ class GmailWatchClient:
 
         scopes = _normalize_scopes(self.config.get("scopes"))
         credentials_file = Path(
-            self.config.get("credentials_file")
-            or os.getenv("GMAIL_CREDENTIALS_FILE")
-            or "credentials.json"
+            self.config.get("credentials_file") or os.getenv("GMAIL_CREDENTIALS_FILE") or "credentials.json"
         ).expanduser()
-        token_file = Path(
-            self.config.get("token_file")
-            or os.getenv("GMAIL_TOKEN_FILE")
-            or "token.json"
-        ).expanduser()
+        token_file = Path(self.config.get("token_file") or os.getenv("GMAIL_TOKEN_FILE") or "token.json").expanduser()
 
         include_existing = bool(self.config.get("include_existing", False))
         baseline_message_id = self.config.get("baseline_message_id")
@@ -169,12 +163,7 @@ class GmailWatchClient:
             current_message_id = _latest_message_id(service, user_id, label_ids, query)
             is_new = current_message_id and (include_existing or current_message_id != baseline_message_id)
             if is_new:
-                message = (
-                    service.users()
-                    .messages()
-                    .get(userId=user_id, id=current_message_id, format="full")
-                    .execute()
-                )
+                message = service.users().messages().get(userId=user_id, id=current_message_id, format="full").execute()
                 if isinstance(message, dict):
                     return _message_to_json(message)
 

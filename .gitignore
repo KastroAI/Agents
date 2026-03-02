@@ -4,6 +4,10 @@
 # Python
 __pycache__/
 *.py[cod]
+*.egg-info/
+dist/
+build/
+.venv/
 
 # Jupyter
 .ipynb_checkpoints/
@@ -13,3 +17,12 @@ __pycache__/
 .env.*
 credentials.json
 token.json
+
+# IDE
+.vscode/
+.idea/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
